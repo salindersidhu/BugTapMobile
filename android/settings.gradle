@@ -1,0 +1,3 @@
+rootProject.name = 'BugTapMobile'
+
+include ':app'
