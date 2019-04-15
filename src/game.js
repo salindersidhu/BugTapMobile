@@ -1,6 +1,13 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, StatusBar } from 'react-native';
+import { StyleSheet, StatusBar, Dimensions } from 'react-native';
+import Matter from "matter-js";
 import { GameEngine } from 'react-native-game-engine';
+
+import Box from './box';
+
+const { width, height } = Dimensions.get("screen");
+const boxSize = Math.trunc(Math.max(width, height) * 0.075);
+const initialBox = Matter.Bodies.rectangle(width/2, height / 2, boxSize, boxSize);
 
 const styles = StyleSheet.create({
     game: {
@@ -19,7 +26,9 @@ class Game extends PureComponent {
                 ref={"engine"}
                 style={styles.game}
                 systems={[]}
-                entities={[]}
+                entities={{
+                    initialBox: { body: initialBox, size: [boxSize, boxSize], color: 'red', renderer: Box}
+                }}
             >
                 <StatusBar hidden={true} />
             </GameEngine>
